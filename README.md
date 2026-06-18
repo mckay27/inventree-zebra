@@ -16,14 +16,6 @@ Goto "Admin Center > Plugins > Install Plugin" and enter `inventree-zebra` as pa
 
 Then goto "Admin Center > Machines" and create a new machine using this driver.
 
-
 ## ZPL Labels
-You can write a ZPL template and upload
-it to the InvenTree Label templates as usual. Add a command to the template's metadata:
 
-```
-{"zpl_template": "True"}
-```
-
-This causes the printer driver to ignores the picture rendered by WeasyPrint. Instead it calls the `render_to_string` function of the template and sends the
-result to the printer.
+If desired, you can enable the "ZPL Template" driver setting and all templates will be sent to the printer as ZPL.
