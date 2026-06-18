@@ -98,6 +98,15 @@ class ZebraLabelPrintingDriver(LabelPrinterBaseDriver):
                 "default": "~TA000~JSN^LT0^MNW^MTT^PMN^PON^PR2,2^LRN",
                 "required": True,
             },
+            "ZPL_TEMPLATE": {
+                "name": _("ZPL Template"),
+                "description": _(
+                    "Render all labels as ZPL templates"
+                ),
+                "validator": bool,
+                "default": False,
+                "required": True,
+            },
         }
 
         super().__init__(*args, **kwargs)
@@ -201,15 +210,9 @@ class ZebraLabelPrintingDriver(LabelPrinterBaseDriver):
         printer_init = cast(str, machine.get_setting("PRINTER_INIT", "D"))
         width, height = round(label.width), round(label.height)
 
-        try:
-            zpl_template = label.metadata['zpl_template']
-        except Exception:
-            zpl_template = False
-
+        zpl_template = machine.get_setting("ZPL_TEMPLATE", "D")
 
         for item in items:
-
-
             if zpl_template:
                 data = label.render_as_string(item, None).replace('\n', '')
             else:
